@@ -75,6 +75,11 @@ applications:
     constraints: arch=amd64
     options:
       paths: /
+  cert:
+    charm: self-signed-certificates
+    channel: stable
+    num_units: 1
+
 machines:
   "0":
     constraints: arch=amd64
@@ -101,3 +106,4 @@ relations:
       landscape-server:ubuntu-installer-attach-ingress,
       ubuntu-installer-attach-ingress:ingress,
     ]
+  - [landscape-server:load-balancer-certificates, cert:certificates]
