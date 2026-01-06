@@ -289,7 +289,7 @@ def write_file(content: bytes, path: str, permissions=0o600, user=HAPROXY_USER) 
     :raises OSError: Error reading or writing file or creating directories.
     """
     if not isinstance(content, bytes):
-        raise ValueError(f"Invalid file content type: {type(content)}")
+        raise ValueError(f"Invalid file content type: {type(content)}, must be bytes!")
 
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "wb") as f:

@@ -4,7 +4,7 @@ import yaml
 
 def get_haproxy_services(state: State, relation: Relation) -> list[dict]:
     """
-    Return the services configured in the HAProxy relation with Landscape server.
+    Return the services configured in the HAProxy config.
     """
     raw_services = state.get_relation(relation.id).local_unit_data["services"]
     services = yaml.safe_load(raw_services)

@@ -8,6 +8,7 @@ from unittest import TestCase
 from unittest.mock import patch
 from urllib.error import URLError
 
+import haproxy
 from settings_files import (
     CONFIGS_DIR,
     configure_for_deployment_mode,
@@ -19,7 +20,6 @@ from settings_files import (
     update_default_settings,
     update_service_conf,
     write_license_file,
-    write_ssl_cert,
 )
 
 
@@ -341,28 +341,28 @@ class WriteLicenseFileTestCase(TestCase):
 
 
 class WriteSSLCertTestCase(TestCase):
-
     def test_write(self):
         """
-        Tests that we can write a b64-encoded string to the correct
+        Tests that we can write bytes to the correct
         path.
         """
         outfile = CapturingBytesIO()
 
         with patch("builtins.open") as open_mock:
             open_mock.return_value = outfile
-            write_ssl_cert(b64encode(b"SSL CERT").decode())
+            haproxy.write_file(b64encode(b"SSL CERT"), haproxy.HAPROXY_CERT_PATH)
 
         self.assertEqual(outfile.captured, b"SSL CERT")
 
-    def test_b64_error(self):
+    def test_not_bytes_error(self):
         """
         Tests that an SSLCertReadException is raised if the cert is
-        invalid b64.
+        not bytes.
         """
         with patch("builtins.open"):
             self.assertRaises(
-                SSLCertReadException,
-                write_ssl_cert,
-                "notvalidb64haha",
+                ValueError,
+                haproxy.write_file,
+                "notbytes",
+                haproxy.HAPROXY_CERT_PATH,
             )

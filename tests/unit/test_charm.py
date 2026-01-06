@@ -42,7 +42,6 @@ from charm import (
     SCHEMA_SCRIPT,
     UPDATE_WSL_DISTRIBUTIONS_SCRIPT,
 )
-from haproxy import GRPC_SERVICE, UBUNTU_INSTALLER_ATTACH_SERVICE
 from settings_files import AMQP_USERNAME, VHOSTS
 from tests.unit.helpers import get_haproxy_services
 

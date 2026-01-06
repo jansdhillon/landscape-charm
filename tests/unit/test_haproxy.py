@@ -8,16 +8,6 @@ import pytest
 import yaml
 
 from charm import LandscapeServerCharm
-from haproxy import (
-    create_grpc_service,
-    create_http_service,
-    create_https_service,
-    create_ubuntu_installer_attach_service,
-    DEFAULT_REDIRECT_SCHEME,
-    HAProxyErrorFile,
-    HTTPBackend,
-    HTTPSBackend,
-)
 
 
 class TestWebsiteRelationJoined:
