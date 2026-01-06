@@ -1298,8 +1298,8 @@ class TestCreateUbuntuInstallerAttachService(unittest.TestCase):
 
 class TestRedirectHTTPS:
     """
-    Tests for the effect of the `redirect_https` configuration parameter on the
-    HAProxy relation.
+    Tests for the effect of the `redirect_https` configuration parameter on
+    HAProxy.
     """
 
     def _get_http_service(self, state: State, relation: Relation) -> dict:
